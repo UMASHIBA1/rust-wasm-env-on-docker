@@ -13,12 +13,10 @@ app ディレクトリ内が共有された状態で rust wasm 実行環境に�
 実行環境は[こちら](https://rustwasm.github.io/docs/book/game-of-life/setup.html)のセットアップが完了した状態になっています
 
 ### 2. cargo generate でプロジェクト作成
-
+`[ProjectName]`は自分が作成したいプロジェクトの名前
 ```
-cargo generate --git https://github.com/rustwasm/wasm-pack-template
+wasm-pack new [ProjectName]
 ```
-
-※ ここでプロジェクト名が聞かれるので今回使うプロジェクト名`[ProjectName]`を指定
 
 ### 3. wasm-pack build で js との橋渡しをするコード群生成
 
@@ -30,7 +28,7 @@ wasm-pack build
 ### 4. Web アプリケーション部分を作成
 
 ```
-npm init wasm-app www
+npm init rust-webpack www
 cd www
 npm install
 ```
@@ -41,8 +39,9 @@ Docker 外部のブラウザから開発サーバーにアクセスできるよ�
 
 ```json
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server"
+    "build": "rimraf dist pkg && webpack",
+    "start": "rimraf dist pkg && webpack-dev-server --open -d",
+    "test": "cargo test && wasm-pack test --headless"
   },
 ```
 
@@ -50,8 +49,9 @@ Docker 外部のブラウザから開発サーバーにアクセスできるよ�
 
 ```json
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server --host 0.0.0.0"
+    "build": "rimraf dist pkg && webpack",
+    "start": "rimraf dist pkg && webpack-dev-server --open -d --host 0.0.0.0",
+    "test": "cargo test && wasm-pack test --headless"
   },
 ```
 
