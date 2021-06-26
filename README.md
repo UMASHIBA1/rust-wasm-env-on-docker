@@ -12,7 +12,7 @@ app ディレクトリ内が共有された状態で rust wasm 実行環境に�
 
 実行環境は[こちら](https://rustwasm.github.io/docs/book/game-of-life/setup.html)のセットアップが完了した状態になっています
 
-### 2. cargo generate でプロジェクト作成
+### 2. wasm-pack new でプロジェクト作成
 `[ProjectName]`は自分が作成したいプロジェクトの名前
 ```
 wasm-pack new [ProjectName]
